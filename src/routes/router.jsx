@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../components/Home";
+import AddItems from "../pages/AddItems";
 
 
 const router = createBrowserRouter([
@@ -16,13 +17,18 @@ const router = createBrowserRouter([
 
             },
             {
+                path: '/addItems',
+                element: <AddItems></AddItems>
+
+            },
+            {
                 path: '/login',
                 element: <Login></Login>
             },
             {
                 path: '/register',
                 element: <Register></Register>
-            }
+            },
         ]
     },
 ]);

@@ -17,7 +17,7 @@ const NavBar = () => {
                         <NavLink to='/'>Home</NavLink>
                     </li>
                     <li>
-                        <NavLink to='/'>Lost & Found Items</NavLink>
+                        <NavLink to='/lost-and-found'>Lost & Found Items</NavLink>
                     </li>
 
                     {!user && (
@@ -36,7 +36,6 @@ const NavBar = () => {
                         >
                             <div title={user?.displayName} className='w-10 rounded-full'>
                                 <img
-                                    referrerPolicy='no-referrer'
                                     alt='User Profile Photo'
                                     src={user?.photoURL}
                                 />
@@ -44,18 +43,18 @@ const NavBar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
+                            className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 space-y-2'
                         >
                             <li>
-                                <NavLink to='/' className='justify-between'>
+                                <NavLink to='/addItems' className='justify-between'>
                                     Add Lost & Found Items
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to='/'>All Recovered Items</NavLink>
+                                <NavLink to='/recoveredItems'>All Recovered Items</NavLink>
                             </li>
                             <li>
-                                <NavLink to='/'>Manage My Items</NavLink>
+                                <NavLink to='/manageItems'>Manage My Items</NavLink>
                             </li>
                             <li className='mt-2'>
                                 <button
