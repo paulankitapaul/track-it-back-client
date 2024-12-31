@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import useAuth from '../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const AddItems = () => {
     const { user } = useAuth();
+    const [selectedDate, setSelectedDate] = useState(new Date());
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,16 +18,40 @@ const AddItems = () => {
         const description = form.description.value;
         const category = form.category.value;
         const location = form.location.value;
-        const date = form.date.value;
         const contactUser = form.contactUser.value;
         const contactMail = form.contactMail.value;
 
-        const formData = {
-            postType, thumbnail, title, description, category, location, date, contactUser, contactMail
+        const addItem = {
+            postType,
+            thumbnail,
+            title,
+            description,
+            category,
+            location,
+            date: selectedDate,
+            contactUser,
+            contactMail,
         };
 
-        console.log('Form Data:', formData);
-        alert('Item added successfully!');
+        fetch('http://localhost:5000/all-item', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(addItem)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Your Lost/Found Item has been added!!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
         form.reset();
     };
 
@@ -40,7 +68,7 @@ const AddItems = () => {
                         className="select select-bordered w-full"
                         required
                     >
-                        <option value="" disabled selected>
+                        <option value="" >
                             Select Type
                         </option>
                         <option value="Lost">Lost</option>
@@ -55,7 +83,7 @@ const AddItems = () => {
                     <input
                         type="text"
                         name="thumbnail"
-                        placeholder='Thumbnail link'
+                        placeholder="Thumbnail link"
                         className="input input-bordered w-full"
                         required
                     />
@@ -96,7 +124,7 @@ const AddItems = () => {
                         className="select select-bordered w-full"
                         required
                     >
-                        <option value="" disabled selected>
+                        <option value="">
                             Select category
                         </option>
                         <option value="Pets">Pets</option>
@@ -123,10 +151,11 @@ const AddItems = () => {
                     <label className="block text-lg font-medium text-gray-700 mb-2">
                         Date Lost or Found
                     </label>
-                    <input
-                        type="date"
-                        name="date"
+                    <DatePicker
+                        selected={selectedDate}
+                        onChange={(date) => setSelectedDate(date)}
                         className="input input-bordered w-full"
+                        dateFormat="dd/MM/yyyy"
                         required
                     />
                 </div>
@@ -140,8 +169,7 @@ const AddItems = () => {
                         defaultValue={user?.displayName}
                         readOnly
                         name="contactUser"
-                        placeholder="Enter your contact info"
-                        className="input input-bordered w-full"
+                        className="input input-bordered w-full mb-2"
                         required
                     />
                     <input
@@ -149,7 +177,6 @@ const AddItems = () => {
                         defaultValue={user?.email}
                         readOnly
                         name="contactMail"
-                        placeholder="Enter your contact info"
                         className="input input-bordered w-full"
                         required
                     />
