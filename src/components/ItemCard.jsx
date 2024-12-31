@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ItemCard = ({ item }) => {
     const { thumbnail, title, postType, description } = item;
@@ -13,10 +14,10 @@ const ItemCard = ({ item }) => {
                 </figure>
                 <div className="card-body">
                     <h2 className="card-title">{title}</h2>
-                    <p><strong>Post Type : </strong>{postType}</p>
-                    <p><strong>Description : </strong>{description}</p>
+                    <p><strong>Post Type: </strong>{postType}</p>
+                    <p><strong>Description: </strong>{description}</p>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Details</button>
+                        <Link to={`/details/${item._id}`} className="btn btn-primary">Details</Link>
                     </div>
                 </div>
             </div>

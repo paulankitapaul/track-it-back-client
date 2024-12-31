@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import ItemCard from '../components/ItemCard';
 
 const LostFound = () => {
-    const items = useLoaderData();
+    // const items = useLoaderData();
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/all-item')
+        .then(res => res.json())
+        .then(data => setItems(data))
+    }, [])
     return (
         <div className='max-w-screen-2xl mx-auto my-10 space-y-3'>
             <h3 className="text-4xl font-bold text-gray-800 text-center">Lost & Found Items</h3>
