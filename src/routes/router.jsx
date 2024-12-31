@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../components/Home";
 import AddItems from "../pages/AddItems";
+import LostFound from "../pages/LostFound";
 
 
 const router = createBrowserRouter([
@@ -14,6 +15,12 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>
+
+            },
+            {
+                path: '/lost-and-found',
+                element: <LostFound></LostFound>,
+                loader: () => fetch('http://localhost:5000/all-item')
 
             },
             {
