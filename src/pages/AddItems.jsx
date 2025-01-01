@@ -34,7 +34,7 @@ const AddItems = () => {
             contactMail,
         };
 
-        fetch('http://localhost:5000/all-item', {
+        fetch('https://track-it-back-server.vercel.app/all-item', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

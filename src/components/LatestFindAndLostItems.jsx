@@ -6,7 +6,7 @@ const LatestFindAndLostItems = () => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/all-item')
+        fetch('https://track-it-back-server.vercel.app/all-item')
             .then((res) => res.json())
             .then((data) => setItems(data))
     }, []);

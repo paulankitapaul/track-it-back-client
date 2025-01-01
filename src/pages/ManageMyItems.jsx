@@ -26,7 +26,7 @@ const ManageMyItems = () => {
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/all-item/${id}`)
+                axios.delete(`https://track-it-back-server.vercel.app/all-item/${id}`)
                     .then((response) => {
                         if (response.data.deletedCount > 0) {
                             setMyItems(myItems.filter(item => item._id !== id));
@@ -60,7 +60,7 @@ const ManageMyItems = () => {
 
         const updatedItems = { postType, thumbnail, title, description, category, location, date, contactUser, contactMail };
 
-        fetch(`http://localhost:5000/all-item/${itemToEdit._id}`, {
+        fetch(`https://track-it-back-server.vercel.app/all-item/${itemToEdit._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

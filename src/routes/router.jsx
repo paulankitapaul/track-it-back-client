@@ -30,7 +30,7 @@ const router = createBrowserRouter([
             {
                 path: '/details/:id',
                 element: <PrivateRoute><Details></Details></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/all-item/${params.id}`)
+                loader: ({ params }) => fetch(`https://track-it-back-server.vercel.app/all-item/${params.id}`)
 
             },
             {
@@ -41,13 +41,13 @@ const router = createBrowserRouter([
             {
                 path: '/recoveredItems',
                 element: <PrivateRoute><RecoveredItems></RecoveredItems></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/recovered-item')
+                loader: () => fetch('https://track-it-back-server.vercel.app/recovered-item')
 
             },
             {
                 path: '/manageItems',
                 element: <PrivateRoute><ManageMyItems></ManageMyItems></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/all-item')
+                loader: () => fetch('https://track-it-back-server.vercel.app/all-item')
 
             },
             {

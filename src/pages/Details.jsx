@@ -36,7 +36,7 @@ const Details = () => {
         };
 
 
-        axios.post('http://localhost:5000/recovered-item', recoveryData)
+        axios.post('https://track-it-back-server.vercel.app/recovered-item', recoveryData)
             .then((response) => {
                 const data = response.data;
                 if (data.insertedId) {
