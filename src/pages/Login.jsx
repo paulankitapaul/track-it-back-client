@@ -3,6 +3,7 @@ import { AuthContext } from '../provider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
     const { userLogin, setUser, handleWithGoogle } = useContext(AuthContext);
@@ -56,6 +57,9 @@ const Login = () => {
 
     return (
         <div className='max-w-screen-2xl mx-auto my-7'>
+            <Helmet>
+                <title>Login</title>
+            </Helmet>
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                 <form onSubmit={handleLogin} className="card-body">
                     <div className="form-control">

@@ -3,6 +3,7 @@ import { AuthContext } from '../provider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const Register = () => {
     const { createUser, setUser, handleWithGoogle, updateUserProfile } = useContext(AuthContext);
@@ -75,6 +76,9 @@ const Register = () => {
 
     return (
         <div className='max-w-screen-2xl mx-auto flex justify-center items-center'>
+            <Helmet>
+                <title>Register</title>
+            </Helmet>
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                 <form onSubmit={handleRegister} className="card-body">
                     <div className="form-control">

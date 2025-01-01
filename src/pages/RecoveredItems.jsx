@@ -1,6 +1,7 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
 import { useLoaderData } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const RecoveredItems = () => {
     const { user } = useAuth();
@@ -9,6 +10,9 @@ const RecoveredItems = () => {
 
     return (
         <div className="max-w-screen-2xl mx-auto my-10">
+            <Helmet>
+                <title>Recovered Items</title>
+            </Helmet>
             <h3 className="text-center text-4xl font-bold text-gray-800 mb-6">My Recovered Items</h3>
             <p className="text-center text-gray-600 mb-10">
                 Below is a list of items you have marked as recovered, including details of recovery.

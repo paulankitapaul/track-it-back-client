@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const AddItems = () => {
     const { user } = useAuth();
@@ -57,6 +58,9 @@ const AddItems = () => {
 
     return (
         <div className="max-w-2xl mx-auto my-10 p-5 bg-white shadow-lg rounded-lg">
+            <Helmet>
+                <title>Add Items</title>
+            </Helmet>
             <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Add Lost or Found Item</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div>

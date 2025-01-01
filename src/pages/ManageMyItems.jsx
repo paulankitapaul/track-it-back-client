@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Helmet } from 'react-helmet-async';
 
 const ManageMyItems = () => {
     const { user } = useAuth();
@@ -99,6 +100,9 @@ const ManageMyItems = () => {
 
     return (
         <div className="max-w-screen-lg mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
+            <Helmet>
+                <title>Manage Items</title>
+            </Helmet>
             <h2 className="text-3xl font-bold text-gray-800 mb-6">Manage My Items</h2>
             {myItems.length > 0 ? (
                 <table className="table-auto w-full border-collapse border border-gray-200">
