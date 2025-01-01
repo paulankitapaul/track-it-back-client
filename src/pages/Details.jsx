@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const Details = () => {
     const { user } = useAuth();
@@ -19,7 +20,7 @@ const Details = () => {
         const recoveredDate = selectedDate;
         const recoveredPersonName = form.recoveredPersonName.value;
         const recoveredPersonEmail = form.recoveredPersonEmail.value;
-        const recoveredItem = item._id 
+        const recoveredItem = item._id
 
         const recoveryData = {
             recoveredItem,
@@ -29,25 +30,28 @@ const Details = () => {
             recoveredPersonEmail
         };
 
-         fetch('http://localhost:5000/recovered-item', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(recoveryData)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.insertedId) {
-                            Swal.fire({
-                                position: "top-end",
-                                icon: "success",
-                                title: "Item recovered has been added!!",
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                        }
-                    })
+
+        axios.post('http://localhost:5000/recovered-item', recoveryData)
+            .then((response) => {
+                const data = response.data;
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Item recovered has been added!!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+            .catch((error) => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: error.response?.data?.message || error.message,
+                    showConfirmButton: true,
+                });
+            });
         setShowModal(false);
     };
 
@@ -137,11 +141,10 @@ const Details = () => {
                                 />
                             </div>
                             <div className="text-center">
-                                <button type="submit" className="btn btn-success btn-wide">
+                                <button className="btn btn-success btn-wide">
                                     Submit
                                 </button>
                                 <button
-                                    type="button"
                                     className="btn btn-error btn-wide ml-4"
                                     onClick={() => setShowModal(false)}
                                 >
