@@ -20,9 +20,11 @@ const Details = () => {
         const recoveredDate = selectedDate;
         const recoveredPersonName = form.recoveredPersonName.value;
         const recoveredPersonEmail = form.recoveredPersonEmail.value;
-        const recoveredItem = item._id
+        const recoveredItem = item._id;
+        const postBy = item.contactMail;
 
         const recoveryData = {
+            postBy,
             recoveredItem,
             recoveredLocation,
             recoveredDate,

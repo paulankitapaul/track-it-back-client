@@ -116,7 +116,7 @@ const AddItems = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="category" className="block text-lg font-medium text-gray-700 mb-2">
+                    <label className="block text-lg font-medium text-gray-700 mb-2">
                         Category
                     </label>
                     <select
@@ -161,7 +161,7 @@ const AddItems = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="contactInfo" className="block text-lg font-medium text-gray-700 mb-2">
+                    <label className="block text-lg font-medium text-gray-700 mb-2">
                         Contact Information
                     </label>
                     <input

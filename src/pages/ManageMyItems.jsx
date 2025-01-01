@@ -53,9 +53,11 @@ const ManageMyItems = () => {
         const description = form.description.value;
         const category = form.category.value;
         const location = form.location.value;
+        const contactUser = form.contactUser.value;
+        const contactMail = form.contactMail.value;
         const date = selectedDate;
 
-        const updatedItems = { postType, thumbnail, title, description, category, location, date };
+        const updatedItems = { postType, thumbnail, title, description, category, location, date, contactUser, contactMail };
 
         fetch(`http://localhost:5000/all-item/${itemToEdit._id}`, {
             method: 'PUT',
@@ -138,9 +140,9 @@ const ManageMyItems = () => {
 
             {showModal && itemToEdit && (
                 <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+                    <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl p-6">
                         <h3 className="text-2xl font-bold mb-4">Update Item</h3>
-                        <form onSubmit={handleUpdate} className="space-y-6">
+                        <form onSubmit={handleUpdate} className="space-y-6 grid grid-cols-4 md:grid-cols-3 gap-2">
                             <div>
                                 <label className="block text-lg font-medium text-gray-700 mb-2">Post Type</label>
                                 <select
@@ -226,6 +228,28 @@ const ManageMyItems = () => {
                                 />
                             </div>
 
+                            <div>
+                                <label className="block text-lg font-medium text-gray-700 mb-2">
+                                    Contact Information
+                                </label>
+                                <input
+                                    type="text"
+                                    defaultValue={user?.displayName}
+                                    readOnly
+                                    name="contactUser"
+                                    className="input input-bordered w-full mb-2"
+                                    required
+                                />
+                                <input
+                                    type="email"
+                                    defaultValue={user?.email}
+                                    readOnly
+                                    name="contactMail"
+                                    className="input input-bordered w-full"
+                                    required
+                                />
+                            </div>
+
                             <div className="text-center">
                                 <button className="btn btn-success btn-wide">Save Changes</button>
                                 <button
@@ -239,6 +263,9 @@ const ManageMyItems = () => {
                     </div>
                 </div>
             )}
+
+
+
         </div>
     );
 };

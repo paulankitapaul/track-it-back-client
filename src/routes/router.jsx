@@ -8,6 +8,7 @@ import LostFound from "../pages/LostFound";
 import Details from "../pages/Details";
 import PrivateRoute from "./PrivateRoute";
 import ManageMyItems from "../pages/ManageMyItems";
+import RecoveredItems from "../pages/RecoveredItems";
 
 
 const router = createBrowserRouter([
@@ -28,12 +29,18 @@ const router = createBrowserRouter([
             {
                 path: '/details/:id',
                 element: <PrivateRoute><Details></Details></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/all-item/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/all-item/${params.id}`)
 
             },
             {
                 path: '/addItems',
                 element: <PrivateRoute><AddItems></AddItems></PrivateRoute>
+
+            },
+            {
+                path: '/recoveredItems',
+                element: <PrivateRoute><RecoveredItems></RecoveredItems></PrivateRoute>,
+                loader: () => fetch('http://localhost:5000/recovered-item')
 
             },
             {
