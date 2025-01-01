@@ -9,6 +9,7 @@ import Details from "../pages/Details";
 import PrivateRoute from "./PrivateRoute";
 import ManageMyItems from "../pages/ManageMyItems";
 import RecoveredItems from "../pages/RecoveredItems";
+import ErrorPage from "../pages/ErrorPage";
 
 
 const router = createBrowserRouter([
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             },
         ]
     },
+    {
+        path:'/*',
+        element: <ErrorPage></ErrorPage>
+    }
 ]);
 
 export default router
