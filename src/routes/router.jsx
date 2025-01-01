@@ -6,6 +6,7 @@ import Home from "../components/Home";
 import AddItems from "../pages/AddItems";
 import LostFound from "../pages/LostFound";
 import Details from "../pages/Details";
+import PrivateRoute from "./PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -25,13 +26,13 @@ const router = createBrowserRouter([
             },
             {
                 path: '/details/:id',
-                element: <Details></Details>,
+                element: <PrivateRoute><Details></Details></PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/all-item/${params.id}`)
 
             },
             {
                 path: '/addItems',
-                element: <AddItems></AddItems>
+                element: <PrivateRoute><AddItems></AddItems></PrivateRoute>
 
             },
             {
