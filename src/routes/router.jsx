@@ -7,6 +7,7 @@ import AddItems from "../pages/AddItems";
 import LostFound from "../pages/LostFound";
 import Details from "../pages/Details";
 import PrivateRoute from "./PrivateRoute";
+import ManageMyItems from "../pages/ManageMyItems";
 
 
 const router = createBrowserRouter([
@@ -33,6 +34,12 @@ const router = createBrowserRouter([
             {
                 path: '/addItems',
                 element: <PrivateRoute><AddItems></AddItems></PrivateRoute>
+
+            },
+            {
+                path: '/manageItems',
+                element: <PrivateRoute><ManageMyItems></ManageMyItems></PrivateRoute>,
+                loader: () => fetch('http://localhost:5000/all-item')
 
             },
             {
