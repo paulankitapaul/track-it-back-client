@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import useAuth from '../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Details = () => {
+    const { user } = useAuth();
     const item = useLoaderData();
-    console.log(item);
     const [showModal, setShowModal] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -15,16 +17,37 @@ const Details = () => {
 
         const recoveredLocation = form.recoveredLocation.value;
         const recoveredDate = selectedDate;
-        // const recoveredPersonName = form.recoveredPersonName.value;
-        // const recoveredPersonEmail = form.recoveredPersonEmail.value;
+        const recoveredPersonName = form.recoveredPersonName.value;
+        const recoveredPersonEmail = form.recoveredPersonEmail.value;
+        const recoveredItem = item._id 
 
         const recoveryData = {
+            recoveredItem,
             recoveredLocation,
             recoveredDate,
+            recoveredPersonName,
+            recoveredPersonEmail
         };
 
-        console.log("Recovery Data:", recoveryData);
-        alert("Item marked as recovered!");
+         fetch('http://localhost:5000/recovered-item', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(recoveryData)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.insertedId) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Item recovered has been added!!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    })
         setShowModal(false);
     };
 
@@ -99,7 +122,7 @@ const Details = () => {
                                 <input
                                     type="text"
                                     name="recoveredPersonName"
-                                    defaultValue={loggedInUser.name}
+                                    defaultValue={user?.displayName}
                                     readOnly
                                     className="input input-bordered w-full"
                                     required
@@ -107,7 +130,7 @@ const Details = () => {
                                 <input
                                     type="email"
                                     name="recoveredPersonEmail"
-                                    defaultValue={loggedInUser.email}
+                                    defaultValue={user?.email}
                                     readOnly
                                     className="input input-bordered w-full mt-2"
                                     required
