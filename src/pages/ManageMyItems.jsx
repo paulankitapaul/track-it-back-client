@@ -11,37 +11,29 @@ const ManageMyItems = () => {
 
     // Delete Item
     const handleDelete = (id) => {
-        // Swal.fire({
-        //     title: 'Are you sure?',
-        //     text: "You won't be able to revert this!",
-        //     icon: 'warning',
-        //     showCancelButton: true,
-        //     confirmButtonColor: '#3085d6',
-        //     cancelButtonColor: '#d33',
-        //     confirmButtonText: 'Yes, delete it!'
-        // }).then((result) => {
-        //     if (result.isConfirmed) {
-        //         axios.delete(`http://localhost:5000/items/${id}`)
-        //             .then((response) => {
-        //                 if (response.data.deletedCount > 0) {
-        //                     setMyItems(myItems.filter(item => item._id !== id));
-        //                     Swal.fire(
-        //                         'Deleted!',
-        //                         'Your item has been deleted.',
-        //                         'success'
-        //                     );
-        //                 }
-        //             })
-        //             .catch((error) => {
-        //                 Swal.fire({
-        //                     position: 'top-end',
-        //                     icon: 'error',
-        //                     title: error.response?.data?.message || error.message,
-        //                     showConfirmButton: true,
-        //                 });
-        //             });
-        //     }
-        // });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`http://localhost:5000/all-item/${id}`)
+                    .then((response) => {
+                        if (response.data.deletedCount > 0) {
+                            setMyItems(myItems.filter(item => item._id !== id));
+                            Swal.fire(
+                                'Deleted!',
+                                'Your item has been deleted.',
+                                'success'
+                            );
+                        }
+                    })
+            }
+        });
     };
 
     const handleUpdate = (id) => {
