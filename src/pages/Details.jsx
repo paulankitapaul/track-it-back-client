@@ -21,11 +21,13 @@ const Details = () => {
         const recoveredPersonName = form.recoveredPersonName.value;
         const recoveredPersonEmail = form.recoveredPersonEmail.value;
         const recoveredItem = item._id;
+        const recoveredTitle = item.title;
         const postBy = item.contactMail;
 
         const recoveryData = {
             postBy,
             recoveredItem,
+            recoveredTitle,
             recoveredLocation,
             recoveredDate,
             recoveredPersonName,
